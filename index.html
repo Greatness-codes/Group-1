@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Todo Done - a simple, responsive task list." />
+    <title>Todo Done</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="tailwind.config.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <script src="app.js" defer></script>
+  </head>
+  <body>
+    <main class="app-canvas">
+      <section class="todo-app" aria-labelledby="app-title">
+        <header class="todo-header">
+          <div>
+            <h1 id="app-title">Todo Done</h1>
+            <p class="date-label">12.09.2025</p>
+          </div>
+          <div class="progress-badge" aria-label="5 of 8 tasks complete">
+            <span id="completedTotal">5</span><span class="slash">/</span><span id="taskTotal">8</span>
+          </div>
+        </header>
+
+        <form class="add-task-form" id="addTaskForm">
+          <label class="sr-only" for="newTask">Create a new task</label>
+          <input id="newTask" name="newTask" type="text" maxlength="70" autocomplete="off" placeholder="Create a new task" />
+          <button class="add-button" type="submit" aria-label="Add task">+</button>
+        </form>
+
+        <section class="task-section" aria-label="Tasks">
+          <ul class="task-list" id="taskList"></ul>
+          <p class="empty-message hidden" id="emptyMessage">Your list is clear. Add something new when you are ready.</p>
+        </section>
+
+        <footer class="app-footer">
+          <span id="footerStatus">5 completed</span>
+          <button type="button" class="clear-button" id="clearCompleted">Clear completed</button>
+        </footer>
+      </section>
+    </main>
+
+    <template id="taskTemplate">
+      <li class="task-row">
+        <button class="check-button" type="button" data-action="toggle" aria-label="Mark task complete"><span>✓</span></button>
+        <span class="task-text"></span>
+        <div class="task-actions">
+          <button class="more-button" type="button" data-action="menu" aria-label="Task options">⋮</button>
+          <div class="task-menu hidden" role="menu">
+            <button type="button" data-action="edit" role="menuitem">Rename</button>
+            <button type="button" data-action="delete" role="menuitem">Delete</button>
+          </div>
+        </div>
+      </li>
+    </template>
+
+    <div class="toast hidden" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
